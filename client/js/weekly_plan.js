@@ -35,31 +35,30 @@ export function setupWeeklyPlan() {
       const day = document.getElementById("weekly-day").value;
       const title = document.getElementById("weekly-title").value;
       const description = document.getElementById("weekly-description").value;
-      const userId = localStorage.getItem("userId"); // 사용자 ID 가져오기
-
-      console.log(
-        `Adding weekly plan for day ${day} with title: ${title}, description: ${description}`
-      );
+      const userId = localStorage.getItem("userId");
 
       const response = await fetch("http://localhost:3000/api/weekly_plan", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId, day, title, description }), // 사용자 ID 포함
+        body: JSON.stringify({ userId, day, title, description }),
       });
+
       if (response.ok) {
         console.log("Weekly plan added successfully!");
         weeklyPlanModal.style.display = "none";
-        loadWeeklyPlans(); // 주간 계획을 다시 로드합니다.
+        loadWeeklyPlans();
       } else {
+        const errorData = await response.json();
+        console.error(errorData.error);
         console.log("Failed to add weekly plan!");
         alert("Failed to add weekly plan!");
       }
     });
 
     async function loadWeeklyPlans() {
-      const userId = localStorage.getItem("userId"); // 사용자 ID 가져오기
+      const userId = localStorage.getItem("userId");
       const response = await fetch(
         `http://localhost:3000/api/weekly_plan?userId=${userId}`
       );
@@ -70,17 +69,46 @@ export function setupWeeklyPlan() {
       });
       plans.forEach((plan) => {
         const dayDiv = dayDivs[plan.day];
-        dayDiv.innerHTML += `<p>${plan.title}: ${plan.description}</p>`;
+        dayDiv.innerHTML += `<p>${plan.title}: ${plan.description}
+                  <button onclick="deleteWeeklyPlan(${plan.id})">Delete</button></p>`;
       });
     }
 
     function openWeeklyPlanModal(day) {
       const dayInput = document.getElementById("weekly-day");
-      dayInput.value = day;
-      weeklyPlanModal.style.display = "block";
+      const titleInput = document.getElementById("weekly-title");
+      const descriptionInput = document.getElementById("weekly-description");
+      const submitButton = document.getElementById("weekly-plan-submit");
+
+      if (dayInput && titleInput && descriptionInput && submitButton) {
+        dayInput.value = day;
+        titleInput.value = "";
+        descriptionInput.value = "";
+        submitButton.textContent = "Add Plan";
+
+        weeklyPlanModal.style.display = "block";
+      } else {
+        console.error("Modal elements not found");
+      }
     }
 
-    // 페이지 로드 시 주간 계획을 로드합니다.
+    window.deleteWeeklyPlan = async function (id) {
+      const response = await fetch(
+        `http://localhost:3000/api/weekly_plan/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (response.ok) {
+        console.log("Weekly plan deleted successfully!");
+        loadWeeklyPlans();
+      } else {
+        console.log("Failed to delete weekly plan!");
+        alert("Failed to delete weekly plan!");
+      }
+    };
+
     loadWeeklyPlans();
   });
 }

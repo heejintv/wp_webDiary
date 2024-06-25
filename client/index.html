@@ -89,7 +89,7 @@
               name="annual-description"
               required
             />
-            <button type="submit">Add Plan</button>
+            <button type="submit" id="annual-plan-submit">Add Plan</button>
           </form>
         </div>
       </div>
@@ -112,11 +112,24 @@
               name="weekly-description"
               required
             />
-            <button type="submit">Add Plan</button>
+            <button type="submit" id="weekly-plan-submit">Add Plan</button>
           </form>
         </div>
       </div>
     </main>
     <script type="module" src="js/main.js"></script>
+    <script>
+      import { setupAnnualPlan } from "./js/annual_plan.js";
+      import { setupWeeklyPlan } from "./js/weekly_plan.js";
+      import { setupSchedule } from "./js/schedule.js";
+      import { setupAuth } from "./js/auth.js";
+      import { setupDarkMode } from "./js/darkmode.js";
+
+      setupAnnualPlan();
+      setupWeeklyPlan();
+      setupSchedule();
+      setupAuth();
+      setupDarkMode();
+    </script>
   </body>
 </html>

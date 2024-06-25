@@ -42,10 +42,6 @@ export function setupAnnualPlan() {
       const description = document.getElementById("annual-description").value;
       const userId = localStorage.getItem("userId");
 
-      console.log(
-        `Adding annual plan for month ${month} with title: ${title}, description: ${description}`
-      );
-
       const response = await fetch("http://localhost:3000/api/annual_plan", {
         method: "POST",
         headers: {
@@ -53,13 +49,14 @@ export function setupAnnualPlan() {
         },
         body: JSON.stringify({ userId, month, title, description }),
       });
+
       if (response.ok) {
         console.log("Annual plan added successfully!");
         annualPlanModal.style.display = "none";
         loadAnnualPlans();
       } else {
         const errorData = await response.json();
-        console.error(errorData.error); // 오류 메시지 로그에 출력
+        console.error(errorData.error);
         console.log("Failed to add annual plan!");
         alert("Failed to add annual plan!");
       }
@@ -77,15 +74,45 @@ export function setupAnnualPlan() {
       });
       plans.forEach((plan) => {
         const monthDiv = monthDivs[plan.month];
-        monthDiv.innerHTML += `<p>${plan.title}: ${plan.description}</p>`;
+        monthDiv.innerHTML += `<p>${plan.title}: ${plan.description}
+                  <button onclick="deleteAnnualPlan(${plan.id})">Delete</button></p>`;
       });
     }
 
     function openAnnualPlanModal(month) {
       const monthInput = document.getElementById("annual-month");
-      monthInput.value = month;
-      annualPlanModal.style.display = "block";
+      const titleInput = document.getElementById("annual-title");
+      const descriptionInput = document.getElementById("annual-description");
+      const submitButton = document.getElementById("annual-plan-submit");
+
+      if (monthInput && titleInput && descriptionInput && submitButton) {
+        monthInput.value = month;
+        titleInput.value = "";
+        descriptionInput.value = "";
+        submitButton.textContent = "Add Plan";
+
+        annualPlanModal.style.display = "block";
+      } else {
+        console.error("Modal elements not found");
+      }
     }
+
+    window.deleteAnnualPlan = async function (id) {
+      const response = await fetch(
+        `http://localhost:3000/api/annual_plan/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (response.ok) {
+        console.log("Annual plan deleted successfully!");
+        loadAnnualPlans();
+      } else {
+        console.log("Failed to delete annual plan!");
+        alert("Failed to delete annual plan!");
+      }
+    };
 
     loadAnnualPlans();
   });

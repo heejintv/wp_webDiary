@@ -9,6 +9,14 @@ export function setupSchedule() {
         dateInput.value = info.dateStr;
         document.getElementById("add-schedule").style.display = "block";
       },
+      eventClick: function (info) {
+        editSchedule(
+          info.event.id,
+          info.event.title,
+          info.event.extendedProps.description,
+          info.event.startStr
+        );
+      },
       eventColor: "#378006", // 스케줄 색상 설정
     });
     calendar.render();

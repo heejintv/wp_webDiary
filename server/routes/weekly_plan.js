@@ -29,4 +29,32 @@ router.get("/", (req, res) => {
   });
 });
 
+// 주간 계획 수정 API
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  const { day, title, description } = req.body;
+  const sql =
+    "UPDATE weekly_plan SET day = ?, title = ?, description = ? WHERE id = ?";
+  db.run(sql, [day, title, description, id], (err) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.status(200).json({ message: "Weekly plan updated successfully" });
+    }
+  });
+});
+
+// 주간 계획 삭제 API
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  const sql = "DELETE FROM weekly_plan WHERE id = ?";
+  db.run(sql, [id], (err) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.status(200).json({ message: "Weekly plan deleted successfully" });
+    }
+  });
+});
+
 module.exports = router;
