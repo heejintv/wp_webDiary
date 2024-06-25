@@ -4,10 +4,10 @@ const db = require("../models/user");
 
 // 주간 계획 추가 API
 router.post("/", (req, res) => {
-  const { day, title, description } = req.body;
+  const { userId, day, title, description } = req.body;
   const sql =
-    "INSERT INTO weekly_plan (day, title, description) VALUES (?, ?, ?)";
-  db.run(sql, [day, title, description], (err) => {
+    "INSERT INTO weekly_plan (user_id, day, title, description) VALUES (?, ?, ?, ?)";
+  db.run(sql, [userId, day, title, description], (err) => {
     if (err) {
       res.status(500).json({ error: err.message });
     } else {
@@ -18,8 +18,9 @@ router.post("/", (req, res) => {
 
 // 주간 계획 조회 API
 router.get("/", (req, res) => {
-  const sql = "SELECT * FROM weekly_plan";
-  db.all(sql, [], (err, rows) => {
+  const { userId } = req.query;
+  const sql = "SELECT * FROM weekly_plan WHERE user_id = ?";
+  db.all(sql, [userId], (err, rows) => {
     if (err) {
       res.status(500).json({ error: err.message });
     } else {

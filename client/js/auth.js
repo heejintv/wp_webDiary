@@ -1,4 +1,6 @@
 import { clearSchedules } from "./schedule.js";
+import { setupAnnualPlan } from "./annual_plan.js";
+import { setupWeeklyPlan } from "./weekly_plan.js";
 
 export function setupAuth() {
   document.addEventListener("DOMContentLoaded", function () {
@@ -15,7 +17,6 @@ export function setupAuth() {
         );
 
         const response = await fetch("http://localhost:3000/api/users/signup", {
-          // 수정된 URL
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -43,7 +44,6 @@ export function setupAuth() {
         console.log(`Logging in with email: ${email}, password: ${password}`);
 
         const response = await fetch("http://localhost:3000/api/users/login", {
-          // 수정된 URL
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -91,6 +91,10 @@ export function setupAuth() {
         if (loginPrompt) {
           loginPrompt.style.display = "none";
         }
+
+        // 사용자별 연간 계획과 주간 계획 로드
+        setupAnnualPlan();
+        setupWeeklyPlan();
       } else {
         if (nav) {
           nav.style.display = "block";
@@ -107,6 +111,10 @@ export function setupAuth() {
         if (loginPrompt) {
           loginPrompt.style.display = "block";
         }
+
+        // 연간 계획과 주간 계획 클리어
+        clearAnnualPlans();
+        clearWeeklyPlans();
       }
     }
 

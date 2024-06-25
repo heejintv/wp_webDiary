@@ -4,10 +4,10 @@ const db = require("../models/user");
 
 // 연간 계획 추가 API
 router.post("/", (req, res) => {
-  const { month, title, description } = req.body;
+  const { userId, month, title, description } = req.body;
   const sql =
-    "INSERT INTO annual_plan (month, title, description) VALUES (?, ?, ?)";
-  db.run(sql, [month, title, description], (err) => {
+    "INSERT INTO annual_plan (user_id, month, title, description) VALUES (?, ?, ?, ?)";
+  db.run(sql, [userId, month, title, description], (err) => {
     if (err) {
       res.status(500).json({ error: err.message });
     } else {
@@ -18,8 +18,9 @@ router.post("/", (req, res) => {
 
 // 연간 계획 조회 API
 router.get("/", (req, res) => {
-  const sql = "SELECT * FROM annual_plan";
-  db.all(sql, [], (err, rows) => {
+  const { userId } = req.query;
+  const sql = "SELECT * FROM annual_plan WHERE user_id = ?";
+  db.all(sql, [userId], (err, rows) => {
     if (err) {
       res.status(500).json({ error: err.message });
     } else {

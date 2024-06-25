@@ -35,22 +35,23 @@ export function setupWeeklyPlan() {
       const day = document.getElementById("weekly-day").value;
       const title = document.getElementById("weekly-title").value;
       const description = document.getElementById("weekly-description").value;
+      const userId = localStorage.getItem("userId"); // 사용자 ID 가져오기
+
       console.log(
         `Adding weekly plan for day ${day} with title: ${title}, description: ${description}`
       );
-      // 서버에 주간 계획 추가 요청을 보냅니다.
+
       const response = await fetch("http://localhost:3000/api/weekly_plan", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ day, title, description }),
+        body: JSON.stringify({ userId, day, title, description }), // 사용자 ID 포함
       });
       if (response.ok) {
         console.log("Weekly plan added successfully!");
         weeklyPlanModal.style.display = "none";
-        // 주간 계획을 다시 로드합니다.
-        loadWeeklyPlans();
+        loadWeeklyPlans(); // 주간 계획을 다시 로드합니다.
       } else {
         console.log("Failed to add weekly plan!");
         alert("Failed to add weekly plan!");
@@ -58,9 +59,11 @@ export function setupWeeklyPlan() {
     });
 
     async function loadWeeklyPlans() {
-      const response = await fetch("http://localhost:3000/api/weekly_plan");
+      const userId = localStorage.getItem("userId"); // 사용자 ID 가져오기
+      const response = await fetch(
+        `http://localhost:3000/api/weekly_plan?userId=${userId}`
+      );
       const plans = await response.json();
-      // 각 요일에 대한 주간 계획을 표시합니다.
       const dayDivs = document.querySelectorAll(".day");
       dayDivs.forEach((div) => {
         div.innerHTML = `<h3>${div.querySelector("h3").textContent}</h3>`;
