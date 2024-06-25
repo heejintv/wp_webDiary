@@ -1,0 +1,301 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333; /* 기본 텍스트 색상 */
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+}
+
+nav {
+  text-align: center;
+  margin: 10px 0;
+}
+
+nav a,
+#logout-button,
+#dark-mode-toggle,
+#dark-mode-toggle-logged-in {
+  color: #333;
+  text-decoration: none;
+  margin: 0 10px;
+  padding: 10px 20px;
+  border: 2px solid #333;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+  cursor: pointer;
+  background-color: white;
+}
+
+nav a:hover,
+#logout-button:hover,
+#dark-mode-toggle:hover,
+#dark-mode-toggle-logged-in:hover {
+  background-color: #333;
+  color: white;
+  transform: scale(1.05);
+}
+
+#user-info {
+  text-align: center;
+  margin: 10px 0;
+}
+
+main {
+  padding: 20px;
+  text-align: center;
+}
+
+form {
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: left;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  display: block;
+  margin-top: 10px;
+  color: #333;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form button {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+form button:hover {
+  background-color: #555;
+  transform: scale(1.05);
+}
+
+section {
+  margin: 20px 0;
+}
+
+#schedule-list {
+  list-style-type: none;
+  padding: 0;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+#schedule-list li {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #333; /* 기본 스케줄 텍스트 색상 */
+}
+
+#schedule-list button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: 1px solid #333;
+  background-color: white;
+  color: #333;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+#schedule-list button:hover {
+  background-color: #333;
+  color: white;
+  transform: scale(1.05);
+}
+
+#search-input {
+  width: 100%;
+  max-width: 500px;
+  padding: 10px;
+  margin: 20px auto;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#annual-plan {
+  margin: 20px 0;
+  text-align: center;
+}
+
+#annual-plan-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.month {
+  border: 1px solid #ddd;
+  margin: 5px;
+  padding: 10px;
+  width: 100px;
+  background-color: white;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#weekly-plan {
+  margin: 20px 0;
+  text-align: center;
+}
+
+#weekly-plan-container {
+  display: flex;
+  justify-content: center;
+}
+
+.day {
+  border: 1px solid #ddd;
+  margin: 5px;
+  padding: 10px;
+  width: 100px;
+  background-color: white;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* 다크 모드 스타일 */
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #cccccc; /* 다크 모드 텍스트 색상 */
+}
+
+header.dark-mode {
+  background-color: #1e1e1e;
+}
+
+nav a.dark-mode,
+#logout-button.dark-mode,
+#dark-mode-toggle.dark-mode,
+#dark-mode-toggle-logged-in.dark-mode {
+  color: #cccccc;
+  border: 2px solid #cccccc;
+  background-color: #333;
+}
+
+nav a.dark-mode:hover,
+#logout-button.dark-mode:hover,
+#dark-mode-toggle.dark-mode:hover,
+#dark-mode-toggle-logged-in.dark-mode:hover {
+  background-color: #cccccc;
+  color: #333;
+}
+
+form.dark-mode {
+  background-color: #333;
+  color: #cccccc;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+form.dark-mode label {
+  color: #cccccc;
+}
+
+form.dark-mode input {
+  background-color: #555;
+  color: #cccccc;
+  border: 1px solid #444;
+}
+
+form.dark-mode button {
+  background-color: #555;
+}
+
+form.dark-mode button:hover {
+  background-color: #777;
+}
+
+#schedule-list li.dark-mode {
+  background-color: #333;
+  border: 1px solid #444;
+  color: #cccccc; /* 다크 모드 스케줄 텍스트 색상 */
+}
+
+#search-input.dark-mode {
+  background-color: #333;
+  color: #cccccc;
+  border: 1px solid #444;
+}
+
+body.dark-mode .month {
+  background-color: #333;
+  border: 1px solid #444;
+  color: #cccccc;
+}
+
+body.dark-mode .day {
+  background-color: #333;
+  border: 1px solid #444;
+  color: #cccccc;
+}
+
+/* 모달 스타일 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

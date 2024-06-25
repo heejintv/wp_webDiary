@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Diary</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>My Web Diary</h1>
+      <nav>
+        <a href="login.html" id="login-link">Login</a>
+        <a href="signup.html" id="signup-link">Sign Up</a>
+        <button id="dark-mode-toggle">Toggle Dark Mode</button>
+      </nav>
+      <div id="user-info" style="display: none">
+        <span id="welcome-message"></span>
+        <button id="logout-button">Logout</button>
+        <button id="dark-mode-toggle-logged-in">Toggle Dark Mode</button>
+      </div>
+    </header>
+    <main>
+      <section id="calendar">
+        <div id="calendar-container"></div>
+      </section>
+      <section id="add-schedule" style="display: none">
+        <h2>Add Schedule</h2>
+        <form id="schedule-form">
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" required />
+          <label for="description">Description:</label>
+          <input type="text" id="description" name="description" required />
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" required />
+          <button type="submit">Add Schedule</button>
+        </form>
+      </section>
+      <section id="edit-schedule" style="display: none">
+        <h2>Edit Schedule</h2>
+        <form id="edit-schedule-form">
+          <input type="hidden" id="edit-id" />
+          <label for="edit-title">Title:</label>
+          <input type="text" id="edit-title" name="edit-title" required />
+          <label for="edit-description">Description:</label>
+          <input
+            type="text"
+            id="edit-description"
+            name="edit-description"
+            required
+          />
+          <label for="edit-date">Date:</label>
+          <input type="date" id="edit-date" name="edit-date" required />
+          <button type="submit">Edit Schedule</button>
+        </form>
+      </section>
+      <section id="schedules">
+        <h2 id="schedule-header" style="display: none">Your Schedules</h2>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search by title or date"
+          style="display: none"
+        />
+        <ul id="schedule-list"></ul>
+        <p id="login-prompt" style="display: none">로그인 후 이용해주세요</p>
+      </section>
+      <section id="annual-plan">
+        <h2>Annual Plan</h2>
+        <div id="annual-plan-container"></div>
+      </section>
+      <div id="annual-plan-modal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="close-annual-plan-modal">&times;</span>
+          <h2>Add Annual Plan</h2>
+          <form id="annual-plan-form">
+            <input type="hidden" id="annual-month" />
+            <label for="annual-title">Title:</label>
+            <input type="text" id="annual-title" name="annual-title" required />
+            <label for="annual-description">Description:</label>
+            <input
+              type="text"
+              id="annual-description"
+              name="annual-description"
+              required
+            />
+            <button type="submit">Add Plan</button>
+          </form>
+        </div>
+      </div>
+      <section id="weekly-plan">
+        <h2>Weekly Plan</h2>
+        <div id="weekly-plan-container"></div>
+      </section>
+      <div id="weekly-plan-modal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="close-weekly-plan-modal">&times;</span>
+          <h2>Add Weekly Plan</h2>
+          <form id="weekly-plan-form">
+            <input type="hidden" id="weekly-day" />
+            <label for="weekly-title">Title:</label>
+            <input type="text" id="weekly-title" name="weekly-title" required />
+            <label for="weekly-description">Description:</label>
+            <input
+              type="text"
+              id="weekly-description"
+              name="weekly-description"
+              required
+            />
+            <button type="submit">Add Plan</button>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
