@@ -9,6 +9,7 @@ router.post("/", (req, res) => {
     "INSERT INTO annual_plan (user_id, month, title, description) VALUES (?, ?, ?, ?)";
   db.run(sql, [userId, month, title, description], (err) => {
     if (err) {
+      console.error(err.message); // 오류 메시지 로그에 출력
       res.status(500).json({ error: err.message });
     } else {
       res.status(200).json({ message: "Annual plan added successfully" });

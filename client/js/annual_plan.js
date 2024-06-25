@@ -40,7 +40,7 @@ export function setupAnnualPlan() {
       const month = document.getElementById("annual-month").value;
       const title = document.getElementById("annual-title").value;
       const description = document.getElementById("annual-description").value;
-      const userId = localStorage.getItem("userId"); // 사용자 ID 가져오기
+      const userId = localStorage.getItem("userId");
 
       console.log(
         `Adding annual plan for month ${month} with title: ${title}, description: ${description}`
@@ -51,20 +51,22 @@ export function setupAnnualPlan() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId, month, title, description }), // 사용자 ID 포함
+        body: JSON.stringify({ userId, month, title, description }),
       });
       if (response.ok) {
         console.log("Annual plan added successfully!");
         annualPlanModal.style.display = "none";
-        loadAnnualPlans(); // 연간 계획을 다시 로드합니다.
+        loadAnnualPlans();
       } else {
+        const errorData = await response.json();
+        console.error(errorData.error); // 오류 메시지 로그에 출력
         console.log("Failed to add annual plan!");
         alert("Failed to add annual plan!");
       }
     });
 
     async function loadAnnualPlans() {
-      const userId = localStorage.getItem("userId"); // 사용자 ID 가져오기
+      const userId = localStorage.getItem("userId");
       const response = await fetch(
         `http://localhost:3000/api/annual_plan?userId=${userId}`
       );
@@ -85,7 +87,6 @@ export function setupAnnualPlan() {
       annualPlanModal.style.display = "block";
     }
 
-    // 페이지 로드 시 연간 계획을 로드합니다.
     loadAnnualPlans();
   });
 }

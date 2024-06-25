@@ -27,17 +27,21 @@ db.serialize(() => {
   // 연간 계획 테이블 생성
   db.run(`CREATE TABLE IF NOT EXISTS annual_plan (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
         month INTEGER,
         title TEXT,
-        description TEXT
+        description TEXT,
+        FOREIGN KEY(user_id) REFERENCES users(id)
     )`);
 
   // 주간 계획 테이블 생성
   db.run(`CREATE TABLE IF NOT EXISTS weekly_plan (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
         day INTEGER,
         title TEXT,
-        description TEXT
+        description TEXT,
+        FOREIGN KEY(user_id) REFERENCES users(id)
     )`);
 });
 
