@@ -1,6 +1,6 @@
 import { clearSchedules } from "./schedule.js";
-import { setupAnnualPlan } from "./annual_plan.js";
-import { setupWeeklyPlan } from "./weekly_plan.js";
+import { setupAnnualPlan, clearAnnualPlans } from "./annual_plan.js";
+import { setupWeeklyPlan, clearWeeklyPlans } from "./weekly_plan.js";
 
 export function setupAuth() {
   document.addEventListener("DOMContentLoaded", function () {
@@ -72,6 +72,8 @@ export function setupAuth() {
       const scheduleHeader = document.getElementById("schedule-header");
       const searchInput = document.getElementById("search-input");
       const loginPrompt = document.getElementById("login-prompt");
+      const annualPlanSection = document.getElementById("annual-plan");
+      const weeklyPlanSection = document.getElementById("weekly-plan");
 
       if (nickname) {
         welcomeMessage.textContent = `${nickname}님 환영합니다!`;
@@ -91,13 +93,15 @@ export function setupAuth() {
         if (loginPrompt) {
           loginPrompt.style.display = "none";
         }
-
-        // 사용자별 연간 계획과 주간 계획 로드
-        setupAnnualPlan();
-        setupWeeklyPlan();
+        if (annualPlanSection) {
+          annualPlanSection.style.display = "block";
+        }
+        if (weeklyPlanSection) {
+          weeklyPlanSection.style.display = "block";
+        }
       } else {
         if (nav) {
-          nav.style.display = "block";
+          nav.style.display = "flex";
         }
         if (userInfo) {
           userInfo.style.display = "none";
@@ -111,26 +115,29 @@ export function setupAuth() {
         if (loginPrompt) {
           loginPrompt.style.display = "block";
         }
-
-        // 연간 계획과 주간 계획 클리어
-        clearAnnualPlans();
-        clearWeeklyPlans();
+        if (annualPlanSection) {
+          annualPlanSection.style.display = "none";
+        }
+        if (weeklyPlanSection) {
+          weeklyPlanSection.style.display = "none";
+        }
       }
     }
 
-    function logout() {
-      localStorage.removeItem("userId");
-      localStorage.removeItem("nickname");
-      clearSchedules();
-      updateUI();
-      window.location.href = "login.html";
-    }
+    updateUI();
 
     const logoutButton = document.getElementById("logout-button");
     if (logoutButton) {
-      logoutButton.addEventListener("click", logout);
+      logoutButton.addEventListener("click", function () {
+        console.log("Logging out");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("nickname");
+        clearSchedules(); // 스케줄 클리어
+        clearAnnualPlans(); // 연간 계획 클리어
+        clearWeeklyPlans(); // 주간 계획 클리어
+        updateUI();
+        window.location.href = "login.html"; // 로그아웃 후 로그인 페이지로 리디렉션
+      });
     }
-
-    updateUI();
   });
 }

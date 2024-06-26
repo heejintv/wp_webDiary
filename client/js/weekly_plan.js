@@ -3,7 +3,7 @@ export function setupWeeklyPlan() {
     const weeklyPlanContainer = document.getElementById(
       "weekly-plan-container"
     );
-    const days = [
+    const daysOfWeek = [
       "Sunday",
       "Monday",
       "Tuesday",
@@ -13,7 +13,7 @@ export function setupWeeklyPlan() {
       "Saturday",
     ];
 
-    days.forEach((day, index) => {
+    daysOfWeek.forEach((day, index) => {
       const dayDiv = document.createElement("div");
       dayDiv.className = "day";
       dayDiv.innerHTML = `<h3>${day}</h3>`;
@@ -111,4 +111,11 @@ export function setupWeeklyPlan() {
 
     loadWeeklyPlans();
   });
+}
+
+export function clearWeeklyPlans() {
+  const weeklyPlanContainer = document.getElementById("weekly-plan-container");
+  if (weeklyPlanContainer) {
+    weeklyPlanContainer.innerHTML = "";
+  }
 }

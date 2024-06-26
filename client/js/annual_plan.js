@@ -117,3 +117,10 @@ export function setupAnnualPlan() {
     loadAnnualPlans();
   });
 }
+
+export function clearAnnualPlans() {
+  const annualPlanContainer = document.getElementById("annual-plan-container");
+  if (annualPlanContainer) {
+    annualPlanContainer.innerHTML = "";
+  }
+}

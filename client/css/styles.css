@@ -195,7 +195,7 @@ section {
 .day button {
   margin-top: 5px;
   padding: 5px 10px;
-  background-color: white;
+  background-color: white; /* 흰색 */
   border: 1px solid #333;
   border-radius: 3px;
   color: #333;
@@ -205,8 +205,8 @@ section {
 
 .month button:hover,
 .day button:hover {
-  background-color: #333;
-  color: #fff;
+  background-color: #333; /* 좀 더 어두운 흰색 */
+  color: white;
   transform: scale(1.05);
 }
 
@@ -378,4 +378,10 @@ body.dark-mode .day {
   background-color: #333; /* 좀 더 어두운 흰색 */
   color: white;
   transform: scale(1.05);
+}
+
+nav,
+#user-info {
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
 }
