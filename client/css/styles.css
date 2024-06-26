@@ -154,7 +154,7 @@ section {
 
 #annual-plan-container {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(6, 1fr); /* 6개의 컬럼 */
   gap: 10px; /* 요소 간 간격 */
 }
 
@@ -162,7 +162,7 @@ section {
   border: 1px solid #ddd;
   padding: 10px;
   width: 100%;
-  min-height: 300px; /* 기본 세로 길이 */
+  min-height: 200px; /* 기본 세로 길이 */
   background-color: white;
   border-radius: 5px;
   text-align: center;
@@ -175,15 +175,16 @@ section {
 }
 
 #weekly-plan-container {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7개의 컬럼 */
+  gap: 10px; /* 요소 간 간격 */
 }
 
 .day {
   border: 1px solid #ddd;
   padding: 10px;
   width: 100%;
-  min-height: 300px; /* 기본 세로 길이 */
+  min-height: 200px; /* 기본 세로 길이 */
   background-color: white;
   border-radius: 5px;
   text-align: center;
@@ -319,4 +320,62 @@ body.dark-mode .day {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* 기존 스타일들 유지 */
+
+#calendar-container {
+  max-width: 800px; /* 원하는 최대 너비로 설정 */
+  margin: 0 auto; /* 가운데 정렬 */
+  overflow: hidden; /* 넘치는 내용 숨기기 */
+}
+
+.fc {
+  transform: scale(1); /* 달력 크기 줄이기 */
+  transform-origin: center; /* 축소 기준점 설정 */
+}
+
+/* Annual Plan & Weekly Plan 수정 */
+#annual-plan-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6개의 컬럼 */
+  gap: 10px; /* 요소 간 간격 */
+}
+
+#weekly-plan-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7개의 컬럼 */
+  gap: 10px; /* 요소 간 간격 */
+}
+
+.month,
+.day {
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 100%;
+  min-height: 300px; /* 기본 세로 길이 */
+  background-color: white;
+  border-radius: 5px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Delete 버튼 스타일 수정 */
+.month button,
+.day button {
+  margin-top: 5px;
+  padding: 5px 10px;
+  background-color: white; /* 흰색 */
+  border: 1px solid #333;
+  border-radius: 3px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.month button:hover,
+.day button:hover {
+  background-color: #333; /* 좀 더 어두운 흰색 */
+  color: white;
+  transform: scale(1.05);
 }
