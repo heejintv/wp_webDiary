@@ -16,13 +16,16 @@ export function setupAuth() {
           `Signing up with email: ${email}, password: ${password}, nickname: ${nickname}`
         );
 
-        const response = await fetch("http://localhost:3000/api/users/signup", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password, nickname }),
-        });
+        const response = await fetch(
+          "https://port-0-wp-webdiary-1pgyr2mlvnorwju.sel5.cloudtype.app/api/users/signup",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password, nickname }),
+          }
+        );
 
         if (response.ok) {
           console.log("Signup response: Success");
@@ -43,13 +46,16 @@ export function setupAuth() {
 
         console.log(`Logging in with email: ${email}, password: ${password}`);
 
-        const response = await fetch("http://localhost:3000/api/users/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        });
+        const response = await fetch(
+          "https://port-0-wp-webdiary-1pgyr2mlvnorwju.sel5.cloudtype.app/api/users/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          }
+        );
 
         if (response.ok) {
           const data = await response.json();

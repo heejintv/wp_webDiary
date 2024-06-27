@@ -42,13 +42,16 @@ export function setupAnnualPlan() {
       const description = document.getElementById("annual-description").value;
       const userId = localStorage.getItem("userId");
 
-      const response = await fetch("http://localhost:3000/api/annual_plan", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId, month, title, description }),
-      });
+      const response = await fetch(
+        "https://port-0-wp-webdiary-1pgyr2mlvnorwju.sel5.cloudtype.app/api/annual_plan",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId, month, title, description }),
+        }
+      );
 
       if (response.ok) {
         console.log("Annual plan added successfully!");
@@ -65,7 +68,7 @@ export function setupAnnualPlan() {
     async function loadAnnualPlans() {
       const userId = localStorage.getItem("userId");
       const response = await fetch(
-        `http://localhost:3000/api/annual_plan?userId=${userId}`
+        `https://port-0-wp-webdiary-1pgyr2mlvnorwju.sel5.cloudtype.app/api/annual_plan?userId=${userId}`
       );
       const plans = await response.json();
       const monthDivs = document.querySelectorAll(".month");
@@ -99,7 +102,7 @@ export function setupAnnualPlan() {
 
     window.deleteAnnualPlan = async function (id) {
       const response = await fetch(
-        `http://localhost:3000/api/annual_plan/${id}`,
+        `https://port-0-wp-webdiary-1pgyr2mlvnorwju.sel5.cloudtype.app/api/annual_plan/${id}`,
         {
           method: "DELETE",
         }

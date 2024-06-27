@@ -37,13 +37,16 @@ export function setupWeeklyPlan() {
       const description = document.getElementById("weekly-description").value;
       const userId = localStorage.getItem("userId");
 
-      const response = await fetch("http://localhost:3000/api/weekly_plan", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId, day, title, description }),
-      });
+      const response = await fetch(
+        "https://port-0-wp-webdiary-1pgyr2mlvnorwju.sel5.cloudtype.app/api/weekly_plan",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId, day, title, description }),
+        }
+      );
 
       if (response.ok) {
         console.log("Weekly plan added successfully!");
@@ -60,7 +63,7 @@ export function setupWeeklyPlan() {
     async function loadWeeklyPlans() {
       const userId = localStorage.getItem("userId");
       const response = await fetch(
-        `http://localhost:3000/api/weekly_plan?userId=${userId}`
+        `https://port-0-wp-webdiary-1pgyr2mlvnorwju.sel5.cloudtype.app/api/weekly_plan?userId=${userId}`
       );
       const plans = await response.json();
       const dayDivs = document.querySelectorAll(".day");
@@ -94,7 +97,7 @@ export function setupWeeklyPlan() {
 
     window.deleteWeeklyPlan = async function (id) {
       const response = await fetch(
-        `http://localhost:3000/api/weekly_plan/${id}`,
+        `https://port-0-wp-webdiary-1pgyr2mlvnorwju.sel5.cloudtype.app/api/weekly_plan/${id}`,
         {
           method: "DELETE",
         }

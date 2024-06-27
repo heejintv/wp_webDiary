@@ -37,13 +37,16 @@ export function setupSchedule() {
           `Adding schedule with title: ${title}, description: ${description}, date: ${date}`
         );
 
-        const response = await fetch("http://localhost:3000/api/diary", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ userId, title, description, date }),
-        });
+        const response = await fetch(
+          "https://port-0-wp-webdiary-1pgyr2mlvnorwju.sel5.cloudtype.app/api/diary",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ userId, title, description, date }),
+          }
+        );
 
         if (response.ok) {
           console.log("Schedule added successfully!");
@@ -69,13 +72,16 @@ export function setupSchedule() {
           `Editing schedule with id: ${id}, title: ${title}, description: ${description}, date: ${date}`
         );
 
-        const response = await fetch(`http://localhost:3000/api/diary/${id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ title, description, date }),
-        });
+        const response = await fetch(
+          `https://port-0-wp-webdiary-1pgyr2mlvnorwju.sel5.cloudtype.app/api/diary/${id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ title, description, date }),
+          }
+        );
 
         if (response.ok) {
           console.log("Schedule updated successfully!");
@@ -91,7 +97,7 @@ export function setupSchedule() {
     async function loadSchedules(startDate, endDate) {
       const userId = localStorage.getItem("userId");
       const response = await fetch(
-        `http://localhost:3000/api/diary?userId=${userId}`
+        `https://port-0-wp-webdiary-1pgyr2mlvnorwju.sel5.cloudtype.app/api/diary?userId=${userId}`
       );
       const schedules = await response.json();
       const filteredSchedules = schedules.filter((schedule) => {
@@ -140,9 +146,12 @@ export function setupSchedule() {
     };
 
     window.deleteSchedule = function (id) {
-      fetch(`http://localhost:3000/api/diary/${id}`, {
-        method: "DELETE",
-      }).then((response) => {
+      fetch(
+        `https://port-0-wp-webdiary-1pgyr2mlvnorwju.sel5.cloudtype.app/api/diary/${id}`,
+        {
+          method: "DELETE",
+        }
+      ).then((response) => {
         if (response.ok) {
           loadSchedules(calendar.view.activeStart, calendar.view.activeEnd); // 스케줄 목록 및 달력 갱신
         } else {
