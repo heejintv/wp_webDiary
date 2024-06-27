@@ -1,6 +1,9 @@
 export function setupSchedule() {
   document.addEventListener("DOMContentLoaded", function () {
     const calendarEl = document.getElementById("calendar-container");
+    const searchInput = document.getElementById("search-input");
+    const scheduleList = document.getElementById("schedule-list");
+
     window.calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: "dayGridMonth",
       events: [],
@@ -94,6 +97,24 @@ export function setupSchedule() {
       });
     }
 
+    searchInput.addEventListener("input", function () {
+      const searchQuery = searchInput.value.toLowerCase();
+      const schedules = scheduleList.getElementsByTagName("li");
+      Array.from(schedules).forEach((schedule) => {
+        const title = schedule
+          .getElementsByClassName("schedule-title")[0]
+          .textContent.toLowerCase();
+        const date = schedule
+          .getElementsByClassName("schedule-date")[0]
+          .textContent.toLowerCase();
+        if (title.includes(searchQuery) || date.includes(searchQuery)) {
+          schedule.style.display = "";
+        } else {
+          schedule.style.display = "none";
+        }
+      });
+    });
+
     async function loadSchedules(startDate, endDate) {
       const userId = localStorage.getItem("userId");
       const response = await fetch(
@@ -123,8 +144,9 @@ export function setupSchedule() {
       scheduleList.innerHTML = "";
       schedules.forEach((schedule) => {
         const li = document.createElement("li");
+        li.className = "schedule-item";
         li.innerHTML = `
-                  <span>${schedule.date}: ${schedule.title} - ${schedule.description}</span>
+                  <span class="schedule-date">${schedule.date}</span>: <span class="schedule-title">${schedule.title}</span> - ${schedule.description}
                   <div>
                       <button onclick="editSchedule(${schedule.id}, '${schedule.title}', '${schedule.description}', '${schedule.date}')">Edit</button>
                       <button onclick="deleteSchedule(${schedule.id})">Delete</button>
